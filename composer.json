@@ -29,7 +29,14 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "files": [
+            "bootstrap/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
