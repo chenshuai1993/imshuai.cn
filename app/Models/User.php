@@ -37,4 +37,10 @@ class User extends Authenticatable
     {
         return $this->id == $model->user_id;
     }
+
+    //一个人对应多个回复
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }
