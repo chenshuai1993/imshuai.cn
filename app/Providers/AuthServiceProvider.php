@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-		 \App\Models\Topic::class => \App\Policies\TopicPolicy::class,
+		 \App\Models\Topic::class => \App\Policies\TopicPolicy::class, //为topic类 指定 策略类
         'App\Model' => 'App\Policies\ModelPolicy',
         \App\Models\User::class  => \App\Policies\UserPolicy::class, //为user类 指定 策略类
     ];
