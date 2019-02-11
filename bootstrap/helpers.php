@@ -4,16 +4,7 @@ function route_class(){
 	return str_replace('.', '-', Route::currentRouteName());
 }
 
-/**
- * Get the active class if the condition is not falsy
- *
- * @param        $condition
- * @param string $activeClass
- * @param string $inactiveClass
- *
- * @return string
- */
-function active_class($condition, $activeClass = 'active', $inactiveClass = '')
+function category_nav_active($category_id)
 {
-	
+    return active_class((if_route('categories.show') && if_route_param('category', $category_id)));
 }
