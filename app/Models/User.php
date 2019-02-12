@@ -10,6 +10,9 @@ use Auth;
 class User extends Authenticatable
 {
     use HasRoles; //模型
+
+    use Traits\ActiveUserHelper; //引入模型
+
     
     use Notifiable {
         notify as protected laravelNotify;
