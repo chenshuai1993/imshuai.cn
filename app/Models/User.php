@@ -7,11 +7,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Auth;
 
+
 class User extends Authenticatable
 {
     use HasRoles; //模型
 
     use Traits\ActiveUserHelper; //引入模型
+    use Traits\LastActivedAtHelper; //记录用户最后登录时间
+    
+
 
     
     use Notifiable {

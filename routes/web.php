@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index')->name('home');
+Route::get('/', 'TopicsController@index')->name('root');
 
 Auth::routes();
 
