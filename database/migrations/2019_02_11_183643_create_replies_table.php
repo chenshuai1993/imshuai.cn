@@ -9,9 +9,9 @@ class CreateRepliesTable extends Migration
 	{
 		Schema::create('replies', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('topic_id')->unsigned()->default(0)->index();
-            $table->integer('user_id')->unsigned()->default(0)->index();
-            $table->text('content');
+            $table->integer('topic_id')->unsigned()->default(0)->index()->comment('帖子id');
+            $table->integer('user_id')->unsigned()->default(0)->index()->comment('用户id');
+            $table->text('content')->comment('回复内容');
             $table->timestamps();
         });
 	}

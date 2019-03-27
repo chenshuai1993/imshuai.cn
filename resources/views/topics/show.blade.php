@@ -2,7 +2,9 @@
 
 @section('title', $topic->title)
 @section('description', $topic->excerpt)
-
+@section('styles')
+    <link href="{{ mix('css/topic.css') }}" rel="stylesheet">
+@stop
 @section('content')
 
 <div class="row">
@@ -33,10 +35,19 @@
                 </h1>
 
                 <div class="article-meta text-center">
+
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                     {{ $topic->created_at->diffForHumans() }}
+
+
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    {{ $topic->view_count }}
                     ⋅
                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                     {{ $topic->reply_count }}
+
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    {{ $topic->category->name }}
                 </div>
 
                 <div class="topic-body">
@@ -44,6 +55,8 @@
                 </div>
 
 
+
+                tags: {{ $topic->tags->implode('name',',') }}
                 @can('update', $topic)
                     <div class="operate">
                         <hr>
@@ -76,3 +89,8 @@
     </div>
 </div>
 @stop
+
+@section('scripts')
+    <script src="{{ mix('js/topic.js') }}"></script>
+@stop
+

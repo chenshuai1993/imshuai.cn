@@ -7,27 +7,40 @@ use App\Models\Topic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Link;
+
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\Handlers\ImageUploadHandler;
 
+use App\Services\CategoriesService;
+use App\Services\TopiceService;
+
+
 class TopicsController extends Controller
 {
-    public function __construct()
+    public  $categoriesService;
+    public  $topiceService;
+
+    public function __construct(CategoriesService $categoriesService,TopiceService $topiceService)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+
+        $this->categoriesService = $categoriesService;
+        $this->topiceService = $topiceService;
     }
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{
-		#$topics = Topic::with('user', 'category')->paginate(30);
+        $categories = $this->categoriesService->getCategories();
+        #$topics = Topic::with('user', 'category')->paginate(30);
 		$topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
-        #dd($active_users);
-		
-		return view('topics.index', compact('topics', 'active_users', 'links'));
+        #print_r($categories);die;
+
+		return view('topics.index', compact('topics', 'active_users', 'links', 'categories'));
 	}
 
     public function show(Request $request, Topic $topic)
@@ -37,22 +50,22 @@ class TopicsController extends Controller
             return redirect($topic->link(), 301);
         }
 
+        $parser = new \HyperDown\Parser;
+        $topic->body = $parser->makeHtml($topic->body);
         return view('topics.show', compact('topic'));
     }
 
 	public function create(Topic $topic)
 	{
-		$categories = Category::all();
+		$categories = $this->categoriesService->getCategories();
 		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
 	public function store(TopicRequest $request, Topic $topic)
 	{
-		$topic->fill($request->all());
-        $topic->user_id = Auth::id();
-        $topic->save();
 
-		return redirect()->to($topic->link())->with('message', '创建帖子成功！');
+	    $this->topiceService->store($request->all());
+        return redirect()->to($topic->link())->with('message', '创建帖子成功！');
 	}
 
 	public function edit(Topic $topic)
@@ -65,9 +78,10 @@ class TopicsController extends Controller
 	public function update(TopicRequest $request, Topic $topic)
 	{
 		$this->authorize('update', $topic);
-		$topic->update($request->all());
+		#$topic->update($request->all());
 
-		return redirect()->to($topic->link())->with('message', '更新帖子成功！');
+        $this->topiceService->update($topic,$request->all());
+        return redirect()->to($topic->link())->with('message', '更新帖子成功！');
 	}
 
 	public function destroy(Topic $topic)

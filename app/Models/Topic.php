@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'body', 'category_id',   'excerpt', 'slug'];
+    protected $fillable = ['title', 'body', 'category_id',  'excerpt', 'slug'];
 
     //一个帖子属于一个分类
     public function category()
@@ -57,5 +57,12 @@ class Topic extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+
+    //帖子对应的标签
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class,'topic_tag','topice_id','tag_id');
     }
 }

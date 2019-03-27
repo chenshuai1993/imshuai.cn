@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('styles')
+    <link href="{{ mix('css/topic.css') }}" rel="stylesheet">
+@stop
 @section('content')
 <div class="container">
     <div class="col-md-10 col-md-offset-1">
@@ -42,8 +44,14 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea name="body" class="form-control" id="editor" rows="3" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
+                        <input class="form-control tags" style="min-height: 50px; height: 50px;"  type="text" id="tags" name="tags" value="{{ $topic->tags->implode('name',',')  }}" placeholder="请填写标签" required/>
                     </div>
+
+
+                    <div class="form-group">
+                        <textarea name="body" class="form-control" id="md_editor" rows="3" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
+                    </div>
+
 
                     <div class="well well-sm">
                         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 保存</button>
@@ -57,30 +65,37 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+
 @stop
 
 @section('scripts')
-    <script type="text/javascript"  src="{{ asset('js/module.js') }}"></script>
-    <script type="text/javascript"  src="{{ asset('js/hotkeys.js') }}"></script>
-    <script type="text/javascript"  src="{{ asset('js/uploader.js') }}"></script>
-    <script type="text/javascript"  src="{{ asset('js/simditor.js') }}"></script>
+    <script src="{{ mix('js/topic.js') }}"></script>
 
-    <script>
-    $(document).ready(function(){
-        var editor = new Simditor({
-            textarea: $('#editor'),
-            upload: {
-                url: '{{ route('topics.upload_image') }}',
-                params: { _token: '{{ csrf_token() }}' },
-                fileKey: 'upload_file',
-                connectionCount: 3,
-                leaveConfirm: '文件上传中，关闭此页面将取消上传。'
-            },
-            pasteImage: true,
-        });
-    });
+
+    <script type="text/javascript">
+        $(function(){
+            //获取textarea dom对象
+            var ele_textarea = document.getElementById('md_editor');
+            //实例化Mditor
+            var editor = new mditor(ele_textarea);
+            var text = editor.getContent();
+
+            //标签
+            $('#tags').tagsInput({
+                width: 'auto',
+                height: 50,
+                onChange: function(elem, elem_tags)
+                {
+                    var languages = ['php','ruby','javascript'];
+                    $('.tag', elem_tags).each(function()
+                    {
+                        if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                            $(this).css('background-color', 'yellow');
+                    });
+                },
+
+            });
+        })
+
     </script>
-
-
 @stop

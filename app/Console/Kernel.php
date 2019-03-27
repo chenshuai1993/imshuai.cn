@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
 
         // 每日零时执行一次
         $schedule->command('imshuai:sync-user-actived-at')->dailyAt('00:00');
+
+        $schedule->command('route:list')->dailyAt('02:00');
     }
 
     /**

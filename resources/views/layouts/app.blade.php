@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     @yield('styles')
 </head>
 
@@ -36,6 +37,7 @@
     @endif
     
     <!-- Scripts -->
+
     <script src="{{ mix('js/app.js') }}"></script>
     @yield('scripts')
 </body>

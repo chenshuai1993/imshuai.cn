@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+
 use Illuminate\Support\ServiceProvider;
+use Encore\Admin\Config\Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
 
         //
         \Carbon\Carbon::setLocale('zh');
+
+        Config::load();  // Add this
     }
 
     /**
@@ -29,10 +33,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        
+
         //
         if (app()->isLocal()) {
             $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
         }
+
+        
+
+        
         
     }
 }
