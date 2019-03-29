@@ -20,7 +20,7 @@ trait ActiveUserHelper
     protected $user_number = 6; // 取出来多少用户
 
     // 缓存相关配置
-    protected $cache_key = 'larabbs_active_users';
+    protected $cache_key = 'imshuai_active_users';
     protected $cache_expire_in_minutes = 65;
 
     public function getActiveUsers()

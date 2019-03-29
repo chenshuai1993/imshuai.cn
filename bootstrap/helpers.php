@@ -65,3 +65,9 @@ if(! function_exists('categories') ){
         return $nav_list;
     }
 }
+
+if(! function_exists('navs') ){
+    function navs(){
+        return  (new \App\Services\NavsService())->getNavs();
+    }
+}

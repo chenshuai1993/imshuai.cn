@@ -19,12 +19,24 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                @if(isset($categories))
-                    @foreach($categories as $key => $cate)
-                        <li class="{{ active_class((if_route('categories.show') && if_route_param('category', $cate->id))) }}"><a href="{{ route('categories.show', $cate->id) }}">{{ $cate->name }}</a></li>
-                    @endforeach
-                @endif
-             </ul>
+                @foreach(navs() as $key => $nav)
+                    @if(!empty($nav['data']))
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $nav['name'] }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($nav['data'] as $key => $val)
+                                    <li><a href="#">{{ $val['name'] }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                    @else
+                        <li><a> {{ $nav['name'] }} </a></li>
+                    @endif
+
+                @endforeach
+
+            </ul>
+
 
 
 

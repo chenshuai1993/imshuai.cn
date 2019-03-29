@@ -16,31 +16,35 @@ use App\Handlers\ImageUploadHandler;
 
 use App\Services\CategoriesService;
 use App\Services\TopiceService;
+use App\Services\NavsService;
 
 
 class TopicsController extends Controller
 {
     public  $categoriesService;
     public  $topiceService;
+    public  $navsService;
 
-    public function __construct(CategoriesService $categoriesService,TopiceService $topiceService)
+    public function __construct(CategoriesService $categoriesService,TopiceService $topiceService,NavsService $navsService)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
 
         $this->categoriesService = $categoriesService;
         $this->topiceService = $topiceService;
+        $this->navsService = $navsService;
     }
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{
-        $categories = $this->categoriesService->getCategories();
-        #$topics = Topic::with('user', 'category')->paginate(30);
-		$topics = $topic->withOrder($request->order)->paginate(20);
+	    $categories = $this->categoriesService->getCategories();
+        $topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
-        #print_r($categories);die;
+        $navs = $this->navsService->getNavs();
 
-		return view('topics.index', compact('topics', 'active_users', 'links', 'categories'));
+        #dd($navs);
+
+		return view('topics.index', compact('topics', 'active_users', 'links', 'categories','navs'));
 	}
 
     public function show(Request $request, Topic $topic)
