@@ -11,4 +11,9 @@ class Menu extends Model
     use MenuHelper;
 
    protected $fillable = ['id', 'name', 'url'];
+
+    public function nav()
+    {
+        return $this->belongsTo(Nav::class);
+    }
 }

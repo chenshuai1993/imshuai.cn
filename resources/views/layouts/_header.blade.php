@@ -20,18 +20,22 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @foreach(navs() as $key => $nav)
-                    @if(!empty($nav['data']))
+                    @if( !empty($nav['data']) && count($nav['data']) > 1 )
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $nav['name'] }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($nav['data'] as $key => $val)
-                                    <li><a href="#">{{ $val['name'] }}</a></li>
+                                    <li><a href="{{ $val['url']  }}">{{ $val['name'] }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
+                    @elseif( !empty($nav['data']) && count($nav['data']) == 1 )
+                        <li><a href="{{ $nav['data'][0]['url'] }}">{{ $nav['data'][0]['name'] }}</a></li>
                     @else
-                        <li><a> {{ $nav['name'] }} </a></li>
+                        <li><a href="/"> {{ $nav['name'] }} </a></li>
                     @endif
+
+
 
                 @endforeach
 

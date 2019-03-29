@@ -12,6 +12,8 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
+
+        //dd(config('name'));
         return $content
             ->header('Dashboard')
             ->description('Description...')
