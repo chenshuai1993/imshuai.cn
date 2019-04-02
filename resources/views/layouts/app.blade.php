@@ -9,7 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'www.imshuai.cn') - 陈帅同学博客 </title>
-    <meta name="description" content="@yield('description', '陈帅同学博客')" />
+    <meta name="author" content="陈帅同学">
+    <meta name="keywords" content="陈帅同学|imshuai.cn|php|mysql|linux|nginx|laravel|数据结构|设计模式">
+    <meta name="description" content="陈帅同学|imshuai.cn|php|mysql|linux|nginx|laravel|数据结构|设计模式">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">

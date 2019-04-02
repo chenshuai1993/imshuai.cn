@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af6eef486bf29f3821bde9837c1dc62c",
+    "content-hash": "d07e21e7839a84955c735300c2039bf2",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -7897,8 +7897,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "yuanchao/laravel-5-markdown-editor": 20,
-        "joyqi/hyper-down": 20
+        "joyqi/hyper-down": 20,
+        "yuanchao/laravel-5-markdown-editor": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
