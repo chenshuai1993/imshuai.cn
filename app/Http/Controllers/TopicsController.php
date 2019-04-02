@@ -54,8 +54,8 @@ class TopicsController extends Controller
             return redirect($topic->link(), 301);
         }
 
-        $parser = new \HyperDown\Parser;
-        $topic->body = $parser->makeHtml($topic->body);
+        #$parser = new \HyperDown\Parser;
+        #$topic->body = $parser->makeHtml($topic->body);
         return view('topics.show', compact('topic'));
     }
 

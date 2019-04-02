@@ -16,5 +16,6 @@ Route::group([
     $router->resource('navs', NavController::class);
     $router->resource('menus', MenuController::class);
     $router->resource('topic', TopicController::class);
+    $router->resource('tags', TagController::class);
 
 });

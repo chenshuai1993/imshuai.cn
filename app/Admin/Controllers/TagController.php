@@ -2,8 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Category;
-use App\Models\Topic;
+use App\Models\Tags;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -11,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class TopicController extends Controller
+class TagController extends Controller
 {
     use HasResourceActions;
 
@@ -80,23 +79,12 @@ class TopicController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Topic);
-        $grid->model()->orderBy('id', 'desc');
+        $grid = new Grid(new Tags);
 
-        $grid->id('Id')->sortable();
-        $grid->title('标题');
-        $grid->user()->name('用户');
-        $grid->category()->name('分类');
-        $grid->tags()->display(function($tags){
-            $tags = array_map(function ($tag) {
-                return "<span class='label label-success'>{$tag['name']}</span>";
-            }, $tags);
-
-            return join('&nbsp;', $tags);
-        });
-        $grid->reply_count('回复')->sortable();
-        $grid->view_count('查看')->sortable();
-        $grid->last_reply_user_id('最后回复用户');
+        $grid->id('Id');
+        $grid->name('Name');
+        $grid->created_at('Created at');
+        $grid->updated_at('Updated at');
 
         return $grid;
     }
@@ -109,19 +97,10 @@ class TopicController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Topic::findOrFail($id));
+        $show = new Show(Tags::findOrFail($id));
 
         $show->id('Id');
-        $show->title('Title');
-        $show->body('Body');
-        $show->user_id('User id');
-        $show->category_id('Category id');
-        $show->reply_count('Reply count');
-        $show->view_count('View count');
-        $show->last_reply_user_id('Last reply user id');
-        $show->order('Order');
-        $show->excerpt('Excerpt');
-        $show->slug('Slug');
+        $show->name('Name');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -135,19 +114,10 @@ class TopicController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Topic);
+        $form = new Form(new Tags);
 
-        $form->text('title', '标题');
-        $form->textarea('body', '内容');
-        $form->text('user.name','用户');
-        $form->select('category_id','栏目名称')->options(Category::all()->pluck('name', 'id'));
-        $form->text('reply_count', '回复数量');
-        $form->text('view_count', '查看数量');
-        $form->text('last_reply_user_id', '最后回复用户');
-
+        $form->text('name', 'Name');
 
         return $form;
     }
-
-
 }
