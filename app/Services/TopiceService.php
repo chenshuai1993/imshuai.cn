@@ -33,7 +33,7 @@ class TopiceService
 
         $tags = [];
         $tagsIds = [];
-        unset($request['_token']);
+
 
         if($request['tags']){
             $tags = explode(',',$request['tags']);
@@ -51,6 +51,8 @@ class TopiceService
 
         $this->topic->fill($request);
         $this->topic->user_id = Auth::id();
+
+        info($request['body']);
         $this->topic->save();
         $this->topic->tags()->attach($tagsIds);
 

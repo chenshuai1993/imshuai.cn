@@ -8,9 +8,16 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Link;
 
+use App\Services\CategoriesService;
+
 class CategoriesController extends Controller
 {
     //
+    protected  $cateService;
+    public function __construct(CategoriesService $categoriesService)
+    {
+        $this->cateService = $categoriesService;
+    }
 
 	public function show(Category $category, Request $request, Topic $topic, User $user, Link $link)
     {
@@ -26,4 +33,5 @@ class CategoriesController extends Controller
         // 传参变量话题和分类到模板中
         return view('topics.index', compact('topics', 'category', 'active_users', 'links'));
     }
+
 }

@@ -89,8 +89,6 @@ class CategoriesController extends Controller
         $grid->sort('Sort');
         $grid->status('Status');
         $grid->nav_id('Nav id');
-        $grid->created_at('Created at');
-        $grid->updated_at('Updated at');
 
         return $grid;
     }

@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Topic;
 
 class CategoriesService
 {
@@ -23,4 +24,11 @@ class CategoriesService
     {
         return $this->category->getCategories();
     }
+
+
+    public function getTopicsByCateName($cateName)
+    {
+        $cateInfo = Category::where('name_en',strtolower($cateName))->first()->topics()->orderBy('id','desc')->get();
+    }
+
 }
