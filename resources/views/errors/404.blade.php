@@ -24,7 +24,7 @@
             <h4 class="w3-agileits2">您请求的页面无法找到。</h4>
             <p>请 <a href="/">返回首页</a> 或发送邮件 css852438363@163.com 联系我们</p>
             <p class="copyright">
-                <span>Copyright © <a href="#">{{ config('web_site_name') }}</a> <a href="http://www.miitbeian.gov.cn/" target="_blank">{{ config('web_ record') }}</a></span>
+                <span>Copyright © <a href="#">{{ config('web_site_name') }}</a></span>
             </p>
 
         </div>

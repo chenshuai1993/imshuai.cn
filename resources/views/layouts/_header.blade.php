@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                Imshuai
+                <img src="{{ url('/images/logo.png') }}" width="110"  height="30" style="margin-top: -5px" alt="陈帅同学" title="首页" />
             </a>
         </div>
 
