@@ -7,6 +7,7 @@ use App\Models\Topic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Link;
+use Carbon\Carbon;
 
 
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ use App\Handlers\ImageUploadHandler;
 use App\Services\CategoriesService;
 use App\Services\TopiceService;
 use App\Services\NavsService;
+use App\Events\ReadAdd;
 
 
 class TopicsController extends Controller
@@ -36,7 +38,8 @@ class TopicsController extends Controller
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{
-	    $categories = $this->categoriesService->getCategories();
+
+        $categories = $this->categoriesService->getCategories();
         $topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
@@ -54,6 +57,7 @@ class TopicsController extends Controller
             return redirect($topic->link(), 301);
         }
 
+        event( new ReadAdd($topic) );
         #$parser = new \HyperDown\Parser;
         #$topic->body = $parser->makeHtml($topic->body);
         return view('topics.show', compact('topic'));

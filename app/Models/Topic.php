@@ -2,11 +2,27 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
+
+
 class Topic extends Model
 {
+    use Searchable;
+
     protected $fillable = ['title', 'body', 'category_id',  'excerpt', 'slug'];
 
-    protected $table = 'topics';
+    protected $table = 'topics_copy';
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'topics_index';
+    }
+
 
     //一个帖子属于一个分类
     public function category()

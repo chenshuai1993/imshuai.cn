@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
      * The application's route middleware.
      *
      * These middleware may be assigned to groups or used individually.
+     * 这些中间键可以分配在组中，也可以直接使用
      *
      * @var array
      */
@@ -60,5 +61,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'checkage' => \App\Http\Middleware\CheckAge::class,
     ];
 }

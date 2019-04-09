@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Http\Request;
 
 Route::get('/', 'TopicsController@index')->name('root');
 
@@ -31,7 +32,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');*/
 
 
-Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']])->middleware('checkage');
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
@@ -44,3 +45,12 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 Route::get('/cate/{cate}',"CategoriesController@index")->name('cate.index');
+
+Route::get('/search', function (Request $request) {
+    //dd($request->search);
+    return App\Models\Topic::search($request->search)->get();
+});
+
+
+
+
