@@ -19,7 +19,7 @@ use App\Services\CategoriesService;
 use App\Services\TopiceService;
 use App\Services\NavsService;
 use App\Events\ReadAdd;
-
+use App\Jobs\SendHelloWorld;
 
 class TopicsController extends Controller
 {
@@ -57,7 +57,12 @@ class TopicsController extends Controller
             return redirect($topic->link(), 301);
         }
 
+        //事件
         event( new ReadAdd($topic) );
+
+
+        //分发队列
+        dispatch( new SendHelloWorld($topic));
         #$parser = new \HyperDown\Parser;
         #$topic->body = $parser->makeHtml($topic->body);
         return view('topics.show', compact('topic'));

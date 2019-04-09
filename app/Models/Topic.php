@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
+#use Laravel\Scout\Searchable;
 
 
 class Topic extends Model
 {
-    use Searchable;
+    #use Searchable;
 
     protected $fillable = ['title', 'body', 'category_id',  'excerpt', 'slug'];
 
