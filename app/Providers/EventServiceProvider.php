@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ReadAdd' => [
             'App\Listeners\ReadAddListener',
         ],
+        'Illuminate\Mail\Events\MessageSending' => [
+            'App\Listeners\LogSentMessage',
+        ],
     ];
 
     /**

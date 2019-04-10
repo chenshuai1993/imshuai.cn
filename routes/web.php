@@ -52,5 +52,13 @@ Route::get('/search', function (Request $request) {
 });
 
 
+Route::get('/mailable', function () {
+    $topic = App\Models\Topic::find(1);
+
+    return new App\Mail\TopicMail($topic);
+    //return new App\Mail\TopicMDMail($topic);
+});
+
+
 
 

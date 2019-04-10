@@ -28,8 +28,8 @@ class ReadAddListener
     {
         //
         //使用 $event->order 来访问 order ...
-        $event->topic->view_count++;
-        $event->topic->save();
+        $event->topic->increment('view_count',1);
+        //$event->topic->save();
 
         info("文章访问加一",[
             'id'=>$event->topic->id,

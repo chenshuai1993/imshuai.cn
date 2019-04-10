@@ -20,6 +20,8 @@ use App\Services\TopiceService;
 use App\Services\NavsService;
 use App\Events\ReadAdd;
 use App\Jobs\SendHelloWorld;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TopicMDMail;
 
 class TopicsController extends Controller
 {
@@ -63,6 +65,13 @@ class TopicsController extends Controller
 
         //分发队列
         dispatch( new SendHelloWorld($topic));
+
+        //邮件发送
+        Mail::to($request->user())
+            //->cc($moreUsers)
+            //->bcc($evenMoreUsers)
+            ->queue(new TopicMDMail($topic));
+
         #$parser = new \HyperDown\Parser;
         #$topic->body = $parser->makeHtml($topic->body);
         return view('topics.show', compact('topic'));
