@@ -29,6 +29,67 @@
     </div>
 @endif
 
+<!--官方技术文档-->
+<div class="panel panel-default">
+    <div class="panel-body active-users">
+
+        <div class="text-center">官方技术文档</div>
+        <hr>
+        <a class="media" href="https://www.php.net/">
+            <div class="media-body">
+                <span class="media-heading">PHP文档</span>
+            </div>
+        </a>
+        <a class="media" href="https://dev.mysql.com/doc/">
+            <div class="media-body">
+                <span class="media-heading">MySql官方文档</span>
+            </div>
+        </a>
+        <a class="media" href="http://man.linuxde.net/">
+            <div class="media-body">
+                <span class="media-heading">Linux命令学习</span>
+            </div>
+        </a>
+        <a class="media" href="https://learnku.com/docs/laravel/5.5">
+            <div class="media-body">
+                <span class="media-heading">laravel5.5文档</span>
+            </div>
+        </a>
+        <a class="media" href="https://studygolang.com/">
+            <div class="media-body">
+                <span class="media-heading">go语言中文网</span>
+            </div>
+        </a>
+
+
+    </div>
+</div>
+
+<!--业界顶级大佬-->
+<div class="panel panel-default">
+    <div class="panel-body active-users">
+
+        <div class="text-center">大佬博客</div>
+        <hr>
+        <a class="media" href="http://www.laruence.com/">
+            <div class="media-body">
+                <span class="media-heading">鸟哥(风雪之隅	)</span>
+            </div>
+        </a>
+        <a class="media" href="http://www.ruanyifeng.com/home.html">
+            <div class="media-body">
+                <span class="media-heading">阮一峰</span>
+            </div>
+        </a>
+        <a class="media" href="http://rango.swoole.com/">
+            <div class="media-body">
+                <span class="media-heading">韩天峰</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+
 @if (count($links))
     <div class="panel panel-default">
         <div class="panel-body active-users">

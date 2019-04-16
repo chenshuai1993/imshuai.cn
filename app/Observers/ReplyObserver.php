@@ -22,13 +22,12 @@ class ReplyObserver
 
     public function created(Reply $reply)
     {
-        #$reply->topic->increment('reply_count', 1);
-
         $topic = $reply->topic;
         $topic->increment('reply_count', 1);
 
         // 通知作者话题被回复了
         $topic->user->notify(new TopicReplied($reply));
+        info('邮件发送ok');
     }
 
     public function deleted(Reply $reply)

@@ -60,17 +60,17 @@ class TopicsController extends Controller
         }
 
         //事件
-        event( new ReadAdd($topic) );
+        //event( new ReadAdd($topic) );
 
 
         //分发队列
-        dispatch( new SendHelloWorld($topic));
+        //dispatch( new SendHelloWorld($topic));
 
         //邮件发送
-        Mail::to($request->user())
+        //Mail::to($request->user())
             //->cc($moreUsers)
             //->bcc($evenMoreUsers)
-            ->queue(new TopicMDMail($topic));
+            //->queue(new TopicMDMail($topic));
 
         #$parser = new \HyperDown\Parser;
         #$topic->body = $parser->makeHtml($topic->body);
