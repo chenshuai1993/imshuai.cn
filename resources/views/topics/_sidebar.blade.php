@@ -62,6 +62,7 @@
         </a>
 
 
+
     </div>
 </div>
 <!--业界顶级大佬-->
@@ -83,6 +84,11 @@
         <a class="media" target="_blank" href="http://rango.swoole.com/">
             <div class="media-body">
                 <span class="media-heading">韩天峰</span>
+            </div>
+        </a>
+        <a class="media" target="_blank" href="https://www.liaoxuefeng.com/">
+            <div class="media-body">
+                <span class="media-heading">廖雪峰</span>
             </div>
         </a>
     </div>
