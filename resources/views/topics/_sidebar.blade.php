@@ -64,7 +64,6 @@
 
     </div>
 </div>
-
 <!--业界顶级大佬-->
 <div class="panel panel-default">
     <div class="panel-body active-users">
@@ -88,7 +87,6 @@
         </a>
     </div>
 </div>
-
 
 @if (count($links))
     <div class="panel panel-default">
