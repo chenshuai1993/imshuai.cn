@@ -71,17 +71,17 @@
 
         <div class="text-center">大佬博客</div>
         <hr>
-        <a class="media" href="http://www.laruence.com/">
+        <a class="media" target="_blank" href="http://www.laruence.com/">
             <div class="media-body">
                 <span class="media-heading">鸟哥(风雪之隅	)</span>
             </div>
         </a>
-        <a class="media" href="http://www.ruanyifeng.com/home.html">
+        <a class="media" target="_blank" href="http://www.ruanyifeng.com/home.html">
             <div class="media-body">
                 <span class="media-heading">阮一峰</span>
             </div>
         </a>
-        <a class="media" href="http://rango.swoole.com/">
+        <a class="media" target="_blank" href="http://rango.swoole.com/">
             <div class="media-body">
                 <span class="media-heading">韩天峰</span>
             </div>
@@ -97,7 +97,7 @@
             <div class="text-center">资源推荐</div>
             <hr>
             @foreach ($links as $link)
-                <a class="media" href="{{ $link->link }}">
+                <a class="media" target="_blank" href="{{ $link->link }}">
                     <div class="media-body">
                         <span class="media-heading">{{ $link->title }}</span>
                     </div>
