@@ -13,14 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//需要dinggo接管api
+
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', function($api) {
+    $api->get('version', function() {
+        return response('this is version v11');
+    });
 });
 
-
-Route::get('test', function () {
-    return 'hello world';
+$api->version('v2', function($api) {
+    $api->get('version', function() {
+        return response('this is version v2');
+    });
 });
-
-
-Route::get('navs',"\App\Admin\Controllers\NavController@navs");
