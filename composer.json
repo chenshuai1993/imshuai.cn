@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "algolia/algoliasearch-client-php": "^2.2",
+        "dingo/api": "^2.2",
         "encore/laravel-admin": "^1.6",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "~6.3",
@@ -87,5 +88,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
 }
