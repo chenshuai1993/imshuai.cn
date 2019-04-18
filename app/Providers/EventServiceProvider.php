@@ -19,6 +19,11 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Mail\Events\MessageSending' => [
             'App\Listeners\LogSentMessage',
         ],
+
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // add your listeners (aka providers) here
+            'SocialiteProviders\Weixin\WeixinExtendSocialite@handle'
+        ],
     ];
 
     /**
