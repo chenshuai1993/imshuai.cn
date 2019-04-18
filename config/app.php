@@ -165,6 +165,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         #Laravel\Scout\ScoutServiceProvider::class,
+        App\Providers\EasySmsServiceProvider::class,
 
         /*
          * Package Service Providers...
