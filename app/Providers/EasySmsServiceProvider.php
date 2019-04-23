@@ -24,7 +24,7 @@ class EasySmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+               //
         $this->app->singleton(EasySms::class, function ($app) {
             return new EasySms(config('easysms'));
         });

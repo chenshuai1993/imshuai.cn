@@ -6,9 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Auth;
+use Tymon\JWTAuth\Contracts\JWTSubject; //jwt
 
-
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasRoles; //模型
 
@@ -21,6 +21,8 @@ class User extends Authenticatable
     use Notifiable {
         notify as protected laravelNotify;
     }
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +41,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // Rest omitted for brevity
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    //jwt
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
 
     public function topics()
     {
