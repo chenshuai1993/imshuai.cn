@@ -63,11 +63,19 @@ class TopicsController extends Controller
         return $this->response->noContent();
     }
 
+    //用户列表
     public function userIndex(User $user, Request $request)
     {
         $topics = $user->topics()->recent()
             ->paginate(20);
 
         return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+
+    //单个帖子展示
+    public function show(Topic $topic)
+    {
+        return $this->response->item($topic, new TopicTransformer());
     }
 }
