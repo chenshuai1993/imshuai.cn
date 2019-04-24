@@ -48,6 +48,8 @@ $api->version('v1',
                 $api->get('users/{user}/topics', 'TopicsController@userIndex')
                     ->name('api.users.topics.index');
 
+
+
                 // 短信验证码
                 $api->post('verificationCodes', 'VerificationCodesController@store')
                     ->name('api.verificationCodes.store');
@@ -101,6 +103,10 @@ $api->version('v1',
                     //删除帖子
                     $api->delete('topics/{topic}', 'TopicsController@destroy')
                         ->name('api.topics.destroy');
+
+                    // 发布回复
+                    $api->post('topics/{topic}/replies', 'RepliesController@store')
+                        ->name('api.topics.replies.store');
                 });
 
             });
