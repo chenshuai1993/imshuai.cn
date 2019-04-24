@@ -33,6 +33,8 @@ $api->version('v1',
             function($api){
 
                 // 游客可以访问的接口
+                $api->get('categories', 'CategoriesController@index')
+                    ->name('api.categories.index');
 
                 // 短信验证码
                 $api->post('verificationCodes', 'VerificationCodesController@store')
