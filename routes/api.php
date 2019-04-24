@@ -85,6 +85,10 @@ $api->version('v1',
                     //修改帖子
                     $api->patch('topics/{topic}', 'TopicsController@update')
                         ->name('api.topics.update');
+
+                    //删除帖子
+                    $api->delete('topics/{topic}', 'TopicsController@destroy')
+                        ->name('api.topics.destroy');
                 });
 
             });
