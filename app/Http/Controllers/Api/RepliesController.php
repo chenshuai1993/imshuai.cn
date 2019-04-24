@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Models\Topic;
 use App\Models\Reply;
 use App\Http\Requests\Api\ReplyRequest;
@@ -33,4 +34,22 @@ class RepliesController extends Controller
 
         return $this->response->noContent();
     }
+
+    //列表
+    public function index(Topic $topic)
+    {
+        $replies = $topic->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+    }
+
+    //用户列表
+    public function userIndex(User $user)
+    {
+        $replies = $user->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+    }
+
+
 }
