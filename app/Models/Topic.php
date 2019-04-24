@@ -11,7 +11,7 @@ class Topic extends Model
 
     protected $fillable = ['title', 'body', 'category_id',  'excerpt', 'slug'];
 
-    protected $table = 'topics_copy';
+    protected $table = 'topics';
 
     /**
      * Get the index name for the model.

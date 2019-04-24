@@ -36,6 +36,14 @@ $api->version('v1',
                 $api->get('categories', 'CategoriesController@index')
                     ->name('api.categories.index');
 
+                //帖子列表
+                $api->get('topics', 'TopicsController@index')
+                    ->name('api.topics.index');
+
+                //单用户-帖子列表
+                $api->get('users/{user}/topics', 'TopicsController@userIndex')
+                    ->name('api.users.topics.index');
+
                 // 短信验证码
                 $api->post('verificationCodes', 'VerificationCodesController@store')
                     ->name('api.verificationCodes.store');
