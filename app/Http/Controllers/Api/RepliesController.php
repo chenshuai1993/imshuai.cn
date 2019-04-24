@@ -9,6 +9,7 @@ use App\Transformers\ReplyTransformer;
 
 class RepliesController extends Controller
 {
+    //添加存储
     public function store(ReplyRequest $request, Topic $topic, Reply $reply)
     {
         $reply->content = $request->content;
@@ -18,5 +19,18 @@ class RepliesController extends Controller
 
         return $this->response->item($reply, new ReplyTransformer())
             ->setStatusCode(201);
+    }
+
+    //删除
+    public function destroy(Topic $topic, Reply $reply)
+    {
+        if ($reply->topic_id != $topic->id) {
+            return $this->response->errorBadRequest();
+        }
+
+        $this->authorize('destroy', $reply);
+        $reply->delete();
+
+        return $this->response->noContent();
     }
 }
