@@ -16,8 +16,6 @@ class User extends Authenticatable implements JWTSubject
     use Traits\LastActivedAtHelper; //记录用户最后登录时间
     
 
-
-    
     use Notifiable {
         notify as protected laravelNotify;
     }
