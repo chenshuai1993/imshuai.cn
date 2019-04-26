@@ -7,10 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject; //jwt
+use Laravel\Passport\HasApiTokens; //passport
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasRoles; //模型
+    use HasApiTokens; //use passport
 
     use Traits\ActiveUserHelper; //引入模型
     use Traits\LastActivedAtHelper; //记录用户最后登录时间
@@ -86,6 +88,15 @@ class User extends Authenticatable implements JWTSubject
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    public function findForPassport($username)
+    {
+        filter_var($username, FILTER_VALIDATE_EMAIL) ?
+            $credentials['email'] = $username :
+            $credentials['phone'] = $username;
+
+        return self::where($credentials)->first();
     }
 
 

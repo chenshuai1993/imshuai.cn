@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 
+use Zend\Diactoros\Response as Psr7Response;
+use Psr\Http\Message\ServerRequestInterface;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use League\OAuth2\Server\AuthorizationServer;
+
 class AuthorizationsController extends Controller
 {
     public function socialStore($type, SocialAuthorizationRequest $request)
@@ -63,7 +68,7 @@ class AuthorizationsController extends Controller
 
 
     //store
-    public function store(AuthorizationRequest $request)
+   /* public function store(AuthorizationRequest $request)
     {
         $username = $request->username;
 
@@ -78,6 +83,16 @@ class AuthorizationsController extends Controller
         }
 
         return $this->respondWithToken($token)->setStatusCode(201);
+    }*/
+
+    //stort token  passport
+    public function store(AuthorizationRequest $originRequest, AuthorizationServer $server, ServerRequestInterface $serverRequest)
+    {
+        try {
+            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response)->withStatus(201);
+        } catch(OAuthServerException $e) {
+            return $this->response->errorUnauthorized($e->getMessage());
+        }
     }
 
 
@@ -90,18 +105,40 @@ class AuthorizationsController extends Controller
         ]);
     }
 
-    //更新token
-    public function update()
+    //更新token jwt
+    /*public function update()
     {
         $token = \Auth::guard('api')->refresh();
         return $this->respondWithToken($token);
+    }*/
+
+    //更新 token  passport
+    public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
+    {
+        try {
+            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response);
+        } catch(OAuthServerException $e) {
+            return $this->response->errorUnauthorized($e->getMessage());
+        }
     }
 
-    //删除 token
-    public function destroy()
+
+    //删除 token jwt
+    /*public function destroy()
     {
         \Auth::guard('api')->logout();
         return $this->response->noContent();
+    }*/
+
+    //删除 token  passport
+    public function destroy()
+    {
+        if (!empty($this->user())) {
+            $this->user()->token()->revoke();
+            return $this->response->noContent();
+        } else {
+            return $this->response->errorUnauthorized('The token is invalid.');
+        }
     }
 
 
