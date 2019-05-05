@@ -60,5 +60,9 @@ Route::get('/mailable', function () {
 });
 
 
+//weather
+Route::get('weather/{city}', 'WeatherController@show');
+
+
 
 

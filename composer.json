@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "algolia/algoliasearch-client-php": "^2.2",
+        "chenshuai1993/weather": "^2.0",
         "dingo/api": "^2.2",
         "encore/laravel-admin": "^1.6",
         "fideloper/proxy": "~3.3",
